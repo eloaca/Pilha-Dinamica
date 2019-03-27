@@ -36,9 +36,9 @@ public class Main {
 				p1.pop();
 			}
 			
-		} catch (Exception e) {
+		} catch (Exception ex) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ex.printStackTrace();
 		}			
 	}
 }
