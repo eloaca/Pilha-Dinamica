@@ -7,7 +7,14 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 
 		// Criando as pilhas
-		Pilha p1 = null;
+		Pilha p1 	= new Pilha();
+		Pilha p2 	= new Pilha();
+		Pilha aux 	= new Pilha();
+		
+		p1.push("f");
+		p1.push("a");
+		p1.push("c");
+		p1.push("e");
 
 		// Scanner para a leitura de entrada de dados
 		Scanner leitura = new Scanner (System.in);
@@ -18,36 +25,75 @@ public class Main {
 		// Contador do laço while
 		int x = 0;
 		
-		// Instanciando a Pilha
-		p1 = new Pilha ();
-		
 		System.out.println ("Olá.\nQuantos visitantes irão participar ?");
 		v = leitura.nextInt();
 		
 		while (x != v) {
 			// Entrada dos dados
-			System.out.println("Entre com a primeira palavra: ");
-			String palavra1 = leitura.next();
+			System.out.println("Entre com a palavra "+x+ ": ");
+			String palavra = leitura.next();
 				
 			//Contador i
 			int i;
-				
-				// Empilhar a palavra1 por caracter
-				for (i = 0; i < palavra1.length(); i++) { 
-					p1.push(palavra1.charAt(i));
-				}
-				p1.push(" "); 
+			
+			p1.push(" "); 
+			
+			// Empilhar a palavra1 por caracter
+			for (i = 0; i < palavra.length(); i++) { 
+				p1.push(palavra.charAt(i));
+			}
 				
 			x++;
 		} // final while
 		
-		// Imprimir a pilha de palavras
+		int letras = 0;
 		
-		System.out.println ("Esta é sua pilha de palavras: ");
+		String topop1 = null;
+		String topop2 = null;
 		
-		while (!p1.isEmpty()){
-			System.out.println ("" +p1.peek());
-			p1.pop();
-		} // final while
+		for (int i = 0; i < v; i++) {
+			while (p1.peek() != " ") {
+				topop1 = p1.peek().toString();
+				p2.push(p1.peek());
+				p1.pop();
+			}
+			
+			if (p1.peek().toString().equals(" "))
+				p1.pop();
+			
+			topop1 = p1.peek().toString();
+			topop2 = p2.peek().toString();
+				
+			if (p1.isEmpty() == false) {
+				if (topop1.equals(topop2)) {
+					p2.pop();
+					aux.push(topop1);
+					p1.pop();
+					letras++;
+					
+					topop1 = p1.peek().toString();
+					
+					if (!p2.isEmpty())
+						topop2 = p2.peek().toString();					
+				}
+				else {
+					while (!p2.isEmpty())
+						p2.pop();
+				}
+			}
+			
+			if (aux.isEmpty() == false) {
+				while (!aux.isEmpty()) {
+					p1.push(aux.peek());
+					aux.pop();
+					
+				} // fim do while
+			} // fim do if
+			
+		} // fim do laco for
+		
+		System.out.println("Ola. Ganharam brindes: "+letras);
 	}
 }
+		
+		
